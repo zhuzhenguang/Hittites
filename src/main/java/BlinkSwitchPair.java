@@ -1,34 +1,29 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class BlinkSwitchPair {
     private static String[] teamMembers = new String[]{"Xiaoshuang", "Xiaoyun", "Kangzhe", "Zhuyu", "Zhenguang", "Shanil"};
-    private static String[] pairOfPast = new String[]{"03", "12", "45"};
+    private static String[] pairOfPast = new String[]{"01", "25", "34"};
 
     public static void main(String[] args) {
-        String[] currentPairs = new String[3];
-        List<Integer> randomInts = new ArrayList<Integer>();
+        Set<Member> teamMemberSet = Arrays.stream(teamMembers).map(Member::new).collect(Collectors.toSet());
+        Set<Pair> pairOfPastSet = Arrays.stream(pairOfPast)
+                .map(pair -> {
+                    String firstMemberName = teamMembers[Integer.parseInt(String.valueOf(pair.charAt(0)))];
+                    String secondMemberName = teamMembers[Integer.parseInt(String.valueOf(pair.charAt(1)))];
+                    return new Pair(new Member(firstMemberName), new Member(secondMemberName));
+                })
+                .collect(Collectors.toSet());
 
-        int i = 0;
-        while (i < 3) {
-            int number1 = new Random().nextInt(6);
-            int number2 = new Random().nextInt(6);
-            if (!randomInts.contains(number1) && !randomInts.contains(number2) && !Arrays.asList(pairOfPast).contains(number1 + "" + number2) && !Arrays.asList(pairOfPast).contains(number2 + "" + number1)) {
-                currentPairs[i] = number1 + "" + number2;
-                randomInts.add(number1);
-                randomInts.add(number2);
+        Scheduler scheduler = new Scheduler(pairOfPastSet, teamMemberSet);
+        Set<Pair> scheduledPairs = scheduler.Schedule();
 
-                i++;
-            }
-        }
+        print(scheduledPairs);
+    }
 
-        for (String currentPair : currentPairs) {
-            int first = Integer.parseInt(String.valueOf(currentPair.charAt(0)));
-            int second = Integer.parseInt(String.valueOf(currentPair.charAt(1)));
-            System.out.println(teamMembers[first] + "-" + teamMembers[second]);
-        }
-
+    private static void print(Collection<Pair> pairs) {
+        pairs.forEach(System.out::println);
     }
 }
