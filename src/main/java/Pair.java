@@ -9,8 +9,10 @@ class Pair {
         this.second = second;
     }
 
-    boolean hasDuplicateMembers() {
-        return first == second;
+    static Pair createBy(String pairString, String[] teamMembers) {
+        String firstMemberName = teamMembers[Integer.parseInt(String.valueOf(pairString.charAt(0)))];
+        String secondMemberName = teamMembers[Integer.parseInt(String.valueOf(pairString.charAt(1)))];
+        return new Pair(new Member(firstMemberName), new Member(secondMemberName));
     }
 
     @Override
@@ -30,6 +32,10 @@ class Pair {
     @Override
     public String toString() {
         return first + "-" + second;
+    }
+
+    boolean hasDuplicateMembers() {
+        return first == second;
     }
 
     boolean containsMemberOf(Pair newPair) {

@@ -15,11 +15,11 @@ class Scheduler {
 
     Set<Pair> Schedule() {
         int countOfPairs = allMembers.size() / 2;
-        IntStream.range(0, countOfPairs).forEach(i -> generatePair());
+        IntStream.range(0, countOfPairs).forEach(i -> currentPairs.add(generatePair()));
         return currentPairs;
     }
 
-    private void generatePair() {
+    private Pair generatePair() {
         Member[] members = allMembers.toArray(new Member[]{});
 
         while (true) {
@@ -39,8 +39,7 @@ class Scheduler {
                 continue;
             }
 
-            currentPairs.add(newPair);
-            break;
+            return newPair;
         }
     }
 }
