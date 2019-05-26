@@ -1,3 +1,5 @@
+package org.thoughtworks.blink;
+
 import java.util.Objects;
 
 class Member {

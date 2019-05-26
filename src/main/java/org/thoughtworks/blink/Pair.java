@@ -1,3 +1,5 @@
+package org.thoughtworks.blink;
+
 import java.util.Objects;
 
 class Pair {
@@ -44,5 +46,13 @@ class Pair {
 
     private boolean contains(Member member) {
         return first.equals(member) || second.equals(member);
+    }
+
+    Member firstMember() {
+        return first;
+    }
+
+    Member companionOf(Member member) {
+        return member.equals(first) ? second : first;
     }
 }
