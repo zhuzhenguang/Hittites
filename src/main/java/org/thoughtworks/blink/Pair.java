@@ -17,6 +17,18 @@ class Pair {
         return new Pair(new Member(firstMemberName), new Member(secondMemberName));
     }
 
+    Member firstMember() {
+        return first;
+    }
+
+    Member secondMember() {
+        return second;
+    }
+
+    Member companionOf(Member member) {
+        return member.equals(first) ? second : first;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,25 +46,5 @@ class Pair {
     @Override
     public String toString() {
         return first + "-" + second;
-    }
-
-    boolean hasDuplicateMembers() {
-        return first == second;
-    }
-
-    boolean containsMemberOf(Pair newPair) {
-        return contains(newPair.first) || contains(newPair.second);
-    }
-
-    private boolean contains(Member member) {
-        return first.equals(member) || second.equals(member);
-    }
-
-    Member firstMember() {
-        return first;
-    }
-
-    Member companionOf(Member member) {
-        return member.equals(first) ? second : first;
     }
 }
