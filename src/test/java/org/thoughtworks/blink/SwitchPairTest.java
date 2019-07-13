@@ -1,13 +1,6 @@
 package org.thoughtworks.blink;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SwitchPairTest {
     private final static Member zhenguang = new Member("zhenguang");
