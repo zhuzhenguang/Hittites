@@ -17,11 +17,11 @@ class SwitchPairTest {
 
     @Test
     void should_switch_pair() {
-        List<Pair> pairList = Lists.newArrayList(
+        Pairs pastPairs = new Pairs(
                 new Pair(zhenguang, xiaoyun),
                 new Pair(xiaoshuang, kangzhe));
 
-        Scheduler scheduler = new Scheduler(new Pairs(pairList), Pair::firstMember);
+        Scheduler scheduler = new Scheduler(pastPairs, Pair::firstMember);
 
         Pairs pairs = scheduler.schedule();
 //        assertEquals(2, scheduledPairs.size());

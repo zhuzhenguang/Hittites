@@ -1,9 +1,6 @@
 package org.thoughtworks.blink;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class Pairs {
@@ -11,6 +8,10 @@ class Pairs {
 
     Pairs(Collection<Pair> pairList) {
         this.pairList = new ArrayList<>(pairList);
+    }
+
+    Pairs(Pair... pairs) {
+        this.pairList = Arrays.asList(pairs);
     }
 
     Pair next(Pair pair) {
