@@ -1,6 +1,7 @@
 package org.thoughtworks.blink;
 
 import java.util.Objects;
+import java.util.Random;
 
 class Pair {
     private Member first;
@@ -27,6 +28,11 @@ class Pair {
 
     Member companionOf(Member member) {
         return member.equals(first) ? second : first;
+    }
+
+    Member randomMember() {
+        int randomIndex = new Random().nextInt(1);
+        return randomIndex == 0 ? first : second;
     }
 
     @Override

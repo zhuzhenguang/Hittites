@@ -2,6 +2,8 @@ package org.thoughtworks.blink;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class SwitchPairTest {
     private final static Member zhenguang = new Member("zhenguang");
     private final static Member xiaoyun = new Member("xiaoyun");
@@ -13,11 +15,12 @@ class SwitchPairTest {
         Pairs pastPairs = new Pairs(
                 new Pair(zhenguang, xiaoyun),
                 new Pair(xiaoshuang, kangzhe));
-
         Scheduler scheduler = new Scheduler(pastPairs, Pair::firstMember);
 
-        Pairs pairs = scheduler.schedule();
-//        assertEquals(2, scheduledPairs.size());
-//        assertEquals(Sets.newHashSet(new Pair(xiaoshuang, xiaoyun), new Pair(zhenguang, kangzhe)), scheduledPairs);
+        Pairs scheduledPairs = scheduler.schedule();
+
+        assertEquals(new Pairs(
+                new Pair(xiaoshuang, xiaoyun),
+                new Pair(zhenguang, kangzhe)), scheduledPairs);
     }
 }

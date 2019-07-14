@@ -10,6 +10,10 @@ class Scheduler {
     }
 
     Pairs schedule() {
+        pastPairs.print();
+
+        System.out.println();
+
         SwitchPairPolicy switchPairPolicy = pastPair -> {
             Member memberOfStayInPair = memberStayInPairPolicy.whoStayInPair(pastPair);
             Pair next = pastPairs.next(pastPair);

@@ -23,8 +23,14 @@ class Pairs {
         }
     }
 
+    List<Member> membersWhoLeaveThePair(WhoStayInPairPolicy whoStayInPairPolicy) {
+        return pairList.stream()
+                .map(pair -> pair.companionOf(whoStayInPairPolicy.whoStayInPair(pair)))
+                .collect(Collectors.toList());
+    }
+
     Pairs switchPairs(SwitchPairPolicy switchPairPolicy) {
-        Set<Pair> currentPairSet = pairList.stream().map(switchPairPolicy::switchFrom).collect(Collectors.toSet());
+        Collection<Pair> currentPairSet = pairList.stream().map(switchPairPolicy::switchFrom).collect(Collectors.toList());
         return new Pairs(currentPairSet);
     }
 
@@ -36,5 +42,18 @@ class Pairs {
         return pairList.stream()
                 .map(pair -> allMembers.indexOf(pair.firstMember()) + "" + allMembers.indexOf(pair.secondMember()))
                 .collect(Collectors.joining(","));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pairs pairs = (Pairs) o;
+        return Objects.equals(pairList, pairs.pairList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pairList);
     }
 }
