@@ -23,12 +23,6 @@ class Pairs {
         }
     }
 
-    List<Member> membersWhoLeaveThePair(WhoStayInPairPolicy whoStayInPairPolicy) {
-        return pairList.stream()
-                .map(pair -> pair.companionOf(whoStayInPairPolicy.whoStayInPair(pair)))
-                .collect(Collectors.toList());
-    }
-
     Pairs switchPairs(SwitchPairPolicy switchPairPolicy) {
         Collection<Pair> currentPairSet = pairList.stream().map(switchPairPolicy::switchFrom).collect(Collectors.toList());
         return new Pairs(currentPairSet);
